@@ -3,7 +3,7 @@
 (require parser-tools/lex
          (prefix-in : parser-tools/lex-sre))
 
-(define-tokens value-tokens (NUMBER))
+(define-tokens value-tokens (NUMBER STRING))
 (define-tokens var-tokens (IDENTIFIER))
 (define-empty-tokens syntax-tokens
   (EOF
@@ -40,7 +40,6 @@
    [#\* (token-PRODUCT)]
    [#\/ (token-DIVISION)]
    [#\< (token-LT)]
-   [#\" (token-ASPAS)]
    ["==" (token-EQ)]
    ["<-" (token-ASSIGN)]
    ["!"  (token-NOT)]
@@ -57,8 +56,12 @@
    ["end" (token-END)]
    ["printout" (token-PRINTOUT)]
    ["readin" (token-READIN)]
+   [(:: #\" (:*(complement #\"))#\") (token-STRING lexeme)]   
    [(:: alphabetic (:* (:+ alphabetic numeric)))
     (token-IDENTIFIER lexeme)]
+   
+
+   
    [(:: numeric (:* numeric))
     (token-NUMBER (string->number lexeme))
     ]))

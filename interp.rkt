@@ -2,7 +2,7 @@
 
 (require "syntax.rkt")
 
-;; ler um valur
+;; capturar um valOR
 
 (define (read-value env v)
   (let ([x (read)])
@@ -66,7 +66,9 @@
 
 ;leitura de dados
     [(input (var v))
-      (read-value env v)]
+     (begin
+        (display "Entre com um valor:")
+        (read-value env v))]
 
 
 

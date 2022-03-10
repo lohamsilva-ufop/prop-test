@@ -28,11 +28,13 @@
                [(IF expr THEN block ELSE block) (eif $2 $4 $6)]
                [(WHILE expr DO block) (ewhile $2 $4)]
                [(READIN expr SEMI) (input (var $2))])
+
+
     
     (block [(BEGIN statements END) $2])
     (expr  [(NUMBER) (value $1)]
            [(IDENTIFIER) (var $1)]
-           ;[(STRING) (value $1)]
+           [(STRING) (value $1)]
 
            [(ASPAS expr ASPAS) (value $2)]
 
@@ -45,7 +47,7 @@
            [(expr EQ expr) (eeq $1 $3)]
            [(expr AND expr) (eand $1 $3)]
            [(NOT expr) (enot $2)]
-           [(LPAREN expr RPAREN) $2]))
+           [(LPAREN IDENTIFIER RPAREN) $2]))
    ))
 
 (define (parse ip)
