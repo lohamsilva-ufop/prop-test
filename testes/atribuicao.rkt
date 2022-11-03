@@ -11,4 +11,3 @@ printout "Insira um valor";
 readin(i);
 
 printout i;
-
